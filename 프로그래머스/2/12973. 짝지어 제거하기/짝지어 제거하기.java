@@ -3,20 +3,21 @@ class Solution
 {
     public int solution(String s)
     {
-        Stack<Character> stack = new Stack<>();
+        ArrayDeque<Character> queue = new ArrayDeque<>();
+
         char[] ch = s.toCharArray();
         for (char c : ch) {
-            if (stack.isEmpty()) {
-                stack.push(c);
+            if (queue.isEmpty()) {
+                queue.addFirst(c);
                 continue;
             }
-            if (stack.peek() == c) {
-                stack.pop();
-            } else if (stack.peek() != c) {
-                stack.push(c);
+            if (queue.peek() == c) {
+                queue.pollFirst();
+            } else if (queue.peek() != c) {
+                queue.addFirst(c);
             }
         }
 
-        return stack.isEmpty() ? 1 : 0;
+        return queue.isEmpty() ? 1 : 0;
     }
 }
