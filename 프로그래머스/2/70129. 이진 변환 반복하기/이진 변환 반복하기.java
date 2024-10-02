@@ -6,7 +6,7 @@ class Solution {
         int length = s.length();
         while(length > 1){
             if(s.contains("0")){
-                s = s.replaceAll("0", "");
+                s = s.replace("0", "");
             }
             zero += length - s.length();
             System.out.println(s.length());
