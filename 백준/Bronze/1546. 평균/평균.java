@@ -20,6 +20,6 @@ public class Main {
         for (double v : arr) {
             sum += v;
         }
-        System.out.printf("%.6f", sum / N);
+        System.out.println(sum / N);
     }
 }
