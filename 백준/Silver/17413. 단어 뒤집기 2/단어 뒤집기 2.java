@@ -23,6 +23,7 @@ public class Main {
                     deque.addLast(c);
                 }
                 i--;
+
                 while(!deque.isEmpty()){
                     sb.append(deque.pollFirst());
                 }
