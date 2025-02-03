@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 public class Main {
-    private static int[] arr;
+    private static String[] arr;
     private static boolean[] visited;
     private static int N;
     private static int K;
@@ -11,10 +11,10 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
         K = Integer.parseInt(br.readLine());
-         arr = new int[N];
+         arr = new String[N];
          visited = new boolean[N];
         for(int i = 0; i < N; i++){
-            arr[i] = Integer.parseInt(br.readLine());
+            arr[i] = br.readLine();
         }
         back(0);
         System.out.println(set.size());
@@ -27,10 +27,9 @@ public class Main {
         for(int i = 0; i < arr.length; i++){
             if (!visited[i]) {
                 visited[i] = true;
-                String num = "" + arr[i];
-                sb.append(num);
+                sb.append(arr[i]);
                 back(depth + 1);
-                sb.setLength(sb.length() - num.length());
+                sb.setLength(sb.length() - arr[i].length());
                 visited[i] = false;
             }
         }
