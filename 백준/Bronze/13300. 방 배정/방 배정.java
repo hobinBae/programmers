@@ -22,29 +22,35 @@ public class Main {
 			}
 		}
 		int sum = 0;
-		for(int i : map0.keySet()) {
-			int value = map0.get(i);
-			if(value <= K) {
-				sum += 1;
-			}else if(value / K % K == 0 ) {
-				sum += value / K;
-			}else {
-				sum += value / K + 1;
-			}
-			
-		}
-		for(int i : map1.keySet()) {
-			int value = map1.get(i);
-			if(value <= K) {
-				sum += 1;
-			}else if(value / K % K == 0) {
+		if(!map0.isEmpty()) {
+			for(int i : map0.keySet()) {
+				int value = map0.get(i);
+				if(value <= K) {
+					sum += 1;
+				}else if(value % K == 0 ) {
+					sum += value / K;
+				}else {
+					sum += value / K + 1;
+				}
 				
-			}else {
-				sum += value / K + 1;
 			}
-		
-			
 		}
+	
+		if(!map1.isEmpty()) {
+			for(int i : map1.keySet()) {
+				int value = map1.get(i);
+				if(value <= K) {
+					sum += 1;
+				}else if(value % K == 0) {
+					sum += value / K;
+				}else {
+					sum += value / K + 1;
+				}
+			
+				
+			}
+		}
+	
 
 		System.out.println(sum);
 	}
