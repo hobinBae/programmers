@@ -1,46 +1,51 @@
 import java.util.*;
 class Solution {
-    
-        private static class Node {
-        int r;
-        int c;
-
-        public Node(int r, int c) {
-            this.r = r;
-            this.c = c;
+    static class Node{
+        int x;
+        int y;
+        public Node(int x, int y){
+            this.x = x;
+            this.y = y;     
         }
     }
-        private static final int[] rx = {0, 0, -1, 1};
-    private static final int[] ry = {-1, 1, 0, 0};
-
+    static int[] dr = {0, 0, 1, -1};
+    static int[] dc = {1, -1, 0, 0 };
+    
     public int solution(int[][] maps) {
-        ArrayDeque<Node> queue = new ArrayDeque<>();
         int N = maps.length;
         int M = maps[0].length;
         boolean[][] visited = new boolean[N][M];
         int[][] dist = new int[N][M];
-        queue.addLast(new Node(0, 0));
+        ArrayDeque<Node> dq = new ArrayDeque<>();
+        dq.addLast(new Node(0, 0));
         visited[0][0] = true;
         dist[0][0] = 1;
 
-        while(!queue.isEmpty()){
-            Node now = queue.pollFirst();
-
+        
+        while(!dq.isEmpty()){
+            Node now = dq.pollFirst();
+            
             for(int i = 0; i < 4; i++){
-                int nr = now.r + rx[i];
-                int nc = now.c + ry[i];
-
-                if(nr < 0 || nc < 0 || nr >= N || nc >= M)
+                int nextRow = now.x + dr[i];
+                int nextCol = now.y + dc[i];
+                
+                if(nextRow >= N || nextCol >= M || nextRow < 0 || nextCol < 0){
                     continue;
-                if(maps[nr][nc] == 0)
+                }
+                
+                
+                if(maps[nextRow][nextCol] == 0){
                     continue;
-                if(!visited[nr][nc]){
-                    visited[nr][nc] = true;
-                    queue.addLast(new Node(nr, nc));
-                    dist[nr][nc] = dist[now.r][now.c] + 1;
+                }
+                if(!visited[nextRow][nextCol]){
+                visited[nextRow][nextCol] = true;
+                dq.addLast(new Node(nextRow, nextCol));
+                dist[nextRow][nextCol] = dist[now.x][now.y] + 1;
                 }
             }
         }
-        return dist[N -1][M - 1] > 0 ? dist[N -1][M - 1]   : -1;
+        
+      return dist[N - 1][M - 1 ] == 0 ? -1 : dist[N-1][M-1];
+        
     }
 }
