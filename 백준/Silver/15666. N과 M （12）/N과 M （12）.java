@@ -32,8 +32,6 @@ public class Main {
 
     static void backtrack( int start, int cnt, ArrayList<Integer> list) {
         if (cnt == M) {
-            ArrayList<Integer> list1 = new ArrayList<>(list);
-            Collections.sort(list1);
             for (Integer i : list) {
                 sb.append(i).append(" ");
             }
