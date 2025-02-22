@@ -7,25 +7,23 @@ public class Main {
 
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
-        int[] arr = new int[N];
+        int[] arr = new int[N + 1];
         int[] prefix = new int[N + 1];
 
         st = new StringTokenizer(br.readLine());
 
-        for(int i = 0; i < N; i++){
-            arr[i] = Integer.parseInt(st.nextToken());
-        }
         for(int i = 1; i <= N; i++){
-            prefix[i] = prefix[i - 1] + arr[i - 1];
+            arr[i] = Integer.parseInt(st.nextToken());
+            prefix[i] = prefix[i - 1] + arr[i];
         }
-
+    
         for(int i = 0; i < M; i++){
             st = new StringTokenizer(br.readLine());
             int L = Integer.parseInt(st.nextToken());
             int R = Integer.parseInt(st.nextToken());
 
             System.out.println(prefix[R] - prefix[L - 1]);
-            
+
         }
 
     }
