@@ -1,52 +1,47 @@
 import java.util.*;
 import java.io.*;
 public class Main {
-    static class Node{
-        int r;
-        int c;
-        public Node(int r, int c){
-            this.r = r;
-            this.c = c;
-        }
-    }
-    private static int[] dr = {0, 0, 1, -1};
-    private static int[] dc = {1, -1, 0, 0};
-    private static int N;
-    private static int M;
-    private static boolean[] used;
-    private static int answer;
-    private static char[][] map;
+    static int R;
+    static int C;
+    static int[] dy = {0, 0, -1, 1};
+    static int[] dx = {-1, 1, 0, 0};
+    static char[][] map;
+    static int answer;
+    static boolean[] used;
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
+        R = Integer.parseInt(st.nextToken());
+        C = Integer.parseInt(st.nextToken());
+        map = new char[R][C];
         used = new boolean['Z' - 'A' + 1];
-        map = new char[N][M];
-        for(int i = 0; i < N; i++){
-            map[i] = br.readLine().toCharArray();
+        for(int i = 0; i < R; i++){
+            char[] ch = br.readLine().toCharArray();
+            for(int j = 0; j < C; j++){
+                map[i][j] = ch[j];
+            }
         }
-        used[map[0][0] - 'A'] = true;
-        backtrack(new Node(0, 0) , 1);
 
+        used[map[0][0] - 'A'] = true;
+        answer = 0;
+        dfs(0, 0, 1);
         System.out.println(answer);
     }
-
-    private static void backtrack(Node now , int cnt){
-        answer = Math.max(answer, cnt);
+    static void dfs(int row, int col, int sum){
+        answer = Math.max(sum, answer);
         for(int i = 0; i < 4; i++){
-            int nr = now.r + dr[i];
-            int nc = now.c + dc[i];
-            if (nr >= N || nc >= M || nr < 0 || nc < 0) {
+            int nr = row + dy[i];
+            int nc = col + dx[i];
+
+            if(nr >= R || nc >= C || nr < 0 || nc < 0){
                 continue;
             }
 
-            if (used[map[nr][nc] - 'A']) {
-                continue;
+            if(!used[map[nr][nc] - 'A']){
+                used[map[nr][nc] - 'A'] = true;
+                dfs(nr, nc, sum + 1);
+                used[map[nr][nc] - 'A'] = false;
             }
-            used[map[nr][nc] - 'A'] = true;
-            backtrack(new Node(nr, nc) , cnt + 1);
-            used[map[nr][nc] - 'A'] = false;
         }
     }
 }
