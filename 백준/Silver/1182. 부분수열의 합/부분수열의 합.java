@@ -16,27 +16,20 @@ public class Main {
         for(int i = 0; i < N; i++){
             arr[i] = Integer.parseInt(st.nextToken());
         }
-        backtrack(0,   new ArrayList<>());
+        backtrack(0,    0, 0);
         System.out.println(answer);
     }
-    static void backtrack(int cnt, ArrayList<Integer>list){
+    static void backtrack(int cnt, int sum, int check){
 
         if(cnt == N){
-            int sum = 0;
-            if(list.isEmpty()){
-                return;
-            }
-            for (Integer i : list) {
-                sum += i;
-            }
-            if(sum == M)
+            if(sum == M && check > 0)
                 answer++;
             return;
         }
-            list.add(arr[cnt]);
-            backtrack(cnt + 1,  list);
-            list.remove(list.size() - 1);
-            backtrack(cnt + 1,   list);
+
+            backtrack(cnt + 1,  sum + arr[cnt], check + 1);
+            backtrack(cnt + 1 , sum, check);
+
 
     }
 }
