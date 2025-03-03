@@ -17,7 +17,16 @@ public class Main {
             int b = Integer.parseInt(st.nextToken()) - 1;
             check[a][b] = true;
         }
-        floyd();
+        for(int k = 0; k < N; k++){
+            for(int i = 0; i < N; i++){
+                for(int j = 0; j < N; j++){
+                    if(check[i][k] && check[k][j]){
+                        check[i][j] = true;
+                    }
+                }
+            }
+        }
+//        floyd();
         for(int i = 0; i < N; i++){
             for(int j = 0; j < N; j++){
                 if(check[i][j] || check[j][i]){
@@ -35,15 +44,7 @@ public class Main {
     }
 
     static void floyd(){
-        for(int k = 0; k < N; k++){
-            for(int i = 0; i < N; i++){
-                for(int j = 0; j < N; j++){
-                    if(check[i][k] && check[k][j]){
-                        check[i][j] = true;
-                    }
-                }
-            }
-        }
+        
     }
 
 }
