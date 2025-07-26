@@ -8,27 +8,27 @@ class Solution {
         answer = 0;
         N = numbers.length;
         copy = numbers;
-        boolean[] used = new boolean[N];
-        back(0, used, target);
+        boolean[] isPositive = new boolean[N];
+        back(0, 0, target);
         return answer;
     }
     
-      static void back(int cnt, boolean[] used, int target){
+      static void back(int cnt, int sum, int target){
         if(cnt >= N){
-            if(target == bfs(used)){
+            if(target == sum){
                 answer++;
             }
             return;
         }
-        used[cnt] = true;
-        back(cnt + 1, used, target);
-        used[cnt] = false;
-        back(cnt + 1, used, target);
+
+        back(cnt + 1, sum + copy[cnt], target);
+
+        back(cnt + 1, sum - copy[cnt], target);
     }
-        static int bfs(boolean[] used){
+        static int dfs(boolean[] isPositive){
         int sum = 0;
         for(int i = 0; i < N; i++){
-            if(used[i]){
+            if(isPositive[i]){
                 sum += copy[i];
             }else{
                 sum -= copy[i];
