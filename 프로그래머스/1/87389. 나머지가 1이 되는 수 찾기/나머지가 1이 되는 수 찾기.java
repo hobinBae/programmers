@@ -8,6 +8,9 @@ class Solution {
             }
             answer++;
         }
+        // while(n % answer != i){
+        //     answer++;
+        // }
         
         return answer;
     }
