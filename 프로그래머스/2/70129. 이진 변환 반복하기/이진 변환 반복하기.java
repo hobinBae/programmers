@@ -1,19 +1,32 @@
 class Solution {
+    static int removeCount;
     public int[] solution(String s) {
-        int zero = 0;
-        int answer = 0;
-        StringBuilder sb = new StringBuilder();
-        int length = s.length();
-        while(length > 1){
-            if(s.contains("0")){
-                s = s.replace("0", "");
+        int count = 0;
+        removeCount = 0;
+        while(true){
+            count++;
+            String now = removeZore(s);
+            if(now.equals("1")){
+                break;
             }
-            zero += length - s.length();
-            System.out.println(s.length());
-            s = Integer.toBinaryString(s.length());
-            length = s.length();
-            answer++;
+            s = numberConversion(now);
         }
-        return new int[]{answer, zero};
+        return new int[]{count, removeCount};
+    }
+    
+    
+    // 0 제거
+    static String removeZore(String s){
+        int sLen = s.length();
+        String str = s.replaceAll("0" ,"");
+        int strLen = str.length();
+        int sum = sLen - strLen;
+        removeCount += sum;
+        return str;
+    }
+    
+    // s 길이 진수 변환
+    static String numberConversion(String s){
+        return Integer.toBinaryString(s.length());
     }
 }
