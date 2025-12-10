@@ -1,15 +1,17 @@
+import java.util.*;
 class Solution {
     public int solution(int[][] sizes) {
-     int maxV = Integer.MIN_VALUE;
+        // 모든 배열을 정렬을 한다. 
+        // 그리고 가로 세로 가장 큰 것만 선택 
+        int maxW = Integer.MIN_VALUE;
         int maxH = Integer.MIN_VALUE;
-
-        for (int[] size : sizes) {
-            int v = Math.max(size[0], size[1]);
-            int h = Math.min(size[0], size[1]);
-
-            maxV = Math.max(maxV, v);
-            maxH = Math.max(maxH, h);
+        
+        for(int[] arr : sizes){
+            Arrays.sort(arr);
+            
+            maxW = Math.max(maxW, arr[0]);
+            maxH = Math.max(maxH, arr[1]);
         }
-        return maxV * maxH;
+        return maxW * maxH;
     }
 }
