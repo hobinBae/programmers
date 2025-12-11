@@ -3,21 +3,27 @@ class Solution
 {
     public int solution(String s)
     {
-        ArrayDeque<Character> queue = new ArrayDeque<>();
-
-        char[] ch = s.toCharArray();
-        for (char c : ch) {
-            if (queue.isEmpty()) {
-                queue.addFirst(c);
+        // 스택 활용
+        ArrayDeque<Character> dq = new ArrayDeque<>();
+        int answer = 0;
+        for(char c : s.toCharArray()){
+            if(dq.isEmpty()){
+                dq.add(c);
                 continue;
             }
-            if (queue.peek() == c) {
-                queue.pollFirst();
-            } else if (queue.peek() != c) {
-                queue.addFirst(c);
+            
+            if(dq.peekLast() == c){
+                dq.pollLast();
+            }else{
+                dq.add(c);
             }
         }
 
-        return queue.isEmpty() ? 1 : 0;
+            
+        if(dq.isEmpty()){
+            answer = 1;
+        }
+        
+        return answer;
     }
 }
