@@ -5,25 +5,18 @@ class Solution
     {
         // 스택 활용
         ArrayDeque<Character> dq = new ArrayDeque<>();
-        int answer = 0;
+
         for(char c : s.toCharArray()){
-            if(dq.isEmpty()){
-                dq.add(c);
-                continue;
-            }
             
-            if(dq.peekLast() == c){
-                dq.pollLast();
+            if(!dq.isEmpty() && dq.peek() == c){
+                dq.pop();
             }else{
-                dq.add(c);
+                dq.push(c);
             }
         }
 
             
-        if(dq.isEmpty()){
-            answer = 1;
-        }
-        
-        return answer;
+
+        return dq.isEmpty() ? 1 : 0;
     }
 }
