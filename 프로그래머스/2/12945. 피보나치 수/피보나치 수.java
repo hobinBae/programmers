@@ -1,12 +1,19 @@
 class Solution {
     public int solution(int n) {
-        int[] fibo = new int[n + 1];
-        fibo[0] = 0;
-        fibo[1] = 1;
-        for(int i = 2; i < fibo.length; i++){
-            fibo[i] = (fibo[i - 1] + fibo[i - 2]) % 1234567;
-            
+
+        int[] arr = new int[n + 1];
+    
+        if(n == 2){
+            return 1;
         }
-        return fibo[n];
+        
+        arr[0] = 0;
+        arr[1] = 1;
+        arr[2] = 1;
+        
+        for(int i = 3; i <= n; i++){
+            arr[i] = (arr[i - 2] + arr[i - 1]) % 1234567; 
+        }
+        return arr[n];
     }
 }
