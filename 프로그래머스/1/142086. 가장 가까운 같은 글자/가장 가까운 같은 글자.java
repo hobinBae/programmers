@@ -1,16 +1,20 @@
+import java.util.*;
 class Solution {
     public int[] solution(String s) {
-             int[] answer = new int[s.length()];
-        String[] str = s.split("");
-        answer[0] = -1;
-        for(int i = 1; i < s.length() ; i++){
-            String split = s.substring(0, i);
-            if(split.contains(str[i])){
-                answer[i] = i - split.lastIndexOf(str[i]);
-            }else
-                answer[i] = -1;
-
+        HashMap<Character, Integer> map = new HashMap<>();
+        int[] answer = new int[s.length()];
+        int idx = 0;
+        for(char c : s.toCharArray()){
+            if(map.get(c) == null){
+                answer[idx] = -1;
+                map.put(c,idx++);
+            }else{
+                int diff = idx - map.get(c);
+                answer[idx] = diff;
+                map.put(c, idx++);
+            }
         }
+        
         return answer;
     }
 }
