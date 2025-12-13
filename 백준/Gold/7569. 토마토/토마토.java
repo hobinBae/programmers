@@ -26,7 +26,6 @@ public class Main {
         int H = Integer.parseInt(st.nextToken());
 
         int[][] map = new int[N * H][M];
-        int[][] dist = new int[N * H][M];
 
         ArrayDeque<Node> dq = new ArrayDeque<>();
 
@@ -37,11 +36,8 @@ public class Main {
                     map[i][j] = Integer.parseInt(st.nextToken());
                     if(map[i][j] == 1){
                         dq.add(new Node(i, j, k + 1));
-                        dist[i][j] = 1;
                     }
-                    if(map[i][j] == -1){
-                        dist[i][j] = 1;
-                    }
+
 
                 }
             }
@@ -63,24 +59,21 @@ public class Main {
 
                 if(nf >= 0){
                     if(map[nf][now.x] == 0){
-                        map[nf][now.x] = 1;
-                        dist[nf][now.x] = dist[now.y][now.x] + 1;
+                        map[nf][now.x] = map[now.y][now.x] + 1;
                         dq.add(new Node(nf, now.x, now.h - 1));
                     }
                 }
 
                 if(df < map.length){
                     if(map[df][now.x] == 0){
-                        map[df][now.x] = 1;
-                        dist[df][now.x] = dist[now.y][now.x] + 1;
+                        map[df][now.x] = map[now.y][now.x] + 1;
                         dq.add(new Node(df, now.x, now.h + 1));
                     }
 
                 }
 
                 if(map[ny][nx] == 0){
-                    map[ny][nx] = 1;
-                    dist[ny][nx] = dist[now.y][now.x] + 1;
+                    map[ny][nx] = map[now.y][now.x] + 1;
                     dq.add(new Node(ny, nx, now.h));
                 }
             }
@@ -88,7 +81,7 @@ public class Main {
         }
         int answer = Integer.MIN_VALUE;
 
-        for (int[] time : dist) {
+        for (int[] time : map) {
             for(int i = 0; i < time.length; i++){
                 if (time[i] == 0) {
                     System.out.println(-1);
