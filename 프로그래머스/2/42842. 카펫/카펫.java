@@ -1,26 +1,36 @@
-import java.util.*;
 class Solution {
     public int[] solution(int brown, int yellow) {
-        List<Integer> list = new ArrayList<>();
-        int a = brown + yellow;
-        int b = brown / 2 + 2;
         int[] answer = new int[2];
-
-        for(int i = b - 3; i >= 1; i--){
-            if(i >= b - i)
-                list.add(i);
-        }
-
-        for(int i = 0; i < list.size(); i++){
-            int sum = (list.get(i) - 2) * ((b - list.get(i)) - 2);
-            if(sum == yellow){
-                answer[0] = list.get(i);
-                answer[1] = b - list.get(i);
-                break;
+        
+        int sum = brown + yellow;
+        
+        for(int i = 1; i <= sum; i++){
+            int r = 0;
+            int c = 0;
+            
+            if(sum % i == 0){
+                c = i;
+                r = sum / i;
+            }else{
+                continue;
             }
+            
+            if(c < r){
+                continue;
+            }
+            
+            if(c * 2 + (r - 2) * 2 != brown){
+                continue;
+            }
+            
+            answer[0] = c;
+            answer[1] = r;
+            break;
+            
         }
-
+        
+        
+        
         return answer;
-
     }
 }
