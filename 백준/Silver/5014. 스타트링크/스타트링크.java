@@ -26,6 +26,10 @@ public class Main {
 
         while (!move.isEmpty()) {
             int now = move.poll();
+            if(now == G){
+                System.out.println(building[G]);
+                return;
+            }
 
             for (int i : next) {
                 int nextFloor = now + i;
@@ -41,10 +45,6 @@ public class Main {
                 move.add(nextFloor);
             }
         }
-        if(building[G] == 0){
             System.out.println("use the stairs");
-        }else{
-            System.out.println(building[G]);
-        }
     }
 }
