@@ -1,10 +1,11 @@
 class Solution {
     public int solution(int a, int b, int n) {
-         int get = 0;
+        int answer = 0;
         while(n >= a){
-            get += (n / a) * b;
-            n = (n % a) + (n / a) * b;
+            answer += (n/a) * b;
+            
+            n = ((n/a) * b) + (n % a);
         }
-        return get;
+        return answer;
     }
 }
