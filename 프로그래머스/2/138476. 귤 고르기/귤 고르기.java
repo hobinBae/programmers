@@ -3,16 +3,22 @@ class Solution {
     public int solution(int k, int[] tangerine) {
         HashMap<Integer, Integer> map = new HashMap<>();
         int answer = 0;
-        for (int i : tangerine) {
-            map.put(i, map.getOrDefault(i, 0) + 1);
+        for(int i = 0; i < tangerine.length; i++){
+            map.put(tangerine[i], map.getOrDefault(tangerine[i], 0) + 1);
         }
-
-        ArrayList<Integer> key = new ArrayList<>(map.keySet());
-        key.sort((o1, o2) -> Integer.compare(map.get(o2), map.get(o1)));
-        int index = 0;
-        while(k > 0){
-            k -= map.get(key.get(index++));
-            answer++;
+        
+        ArrayList<Integer> keySet = new ArrayList<>(map.keySet());
+        
+        keySet.sort((o1, o2) -> map.get(o2).compareTo(map.get(o1)));
+        
+        for(int i : keySet){
+            if(k - map.get(i) <= 0){
+                answer++;
+                break;
+            }else{
+                k -= map.get(i);
+                answer++;
+            }
         }
         return answer;
     }
