@@ -1,26 +1,31 @@
 class Solution {
-        private static int gcd(int a, int b){
-        int temp = 0, r = 0;
-        if(a < b){
-            temp = a;
-            a = b;
-            b = temp;
+    public int solution(int[] arr) {
+    
+        int lcmValue = arr[0];
+        
+        for(int i = 1; i < arr.length; i++){
+            lcmValue = lcm(lcmValue, arr[i]);
         }
 
-        while(b >= 1){
-            r = a % b;
+        return lcmValue;
+    }
+    
+    static int gcd(int a, int b){
+        if(a < b){
+            int t = a;
+             a = b;
+             b = t;
+        }
+        int c = 0;
+        while(b > 0){
+            c = a % b;
             a = b;
-            b = r;
+            b = c;
         }
         return a;
     }
-    private static int lcm(int a, int b){
+    static int lcm(int a, int b){
         return (a * b) / gcd(a, b);
     }
-    public int solution(int[] arr) {
-     for(int i = 0; i < arr.length - 1; i++){
-            arr[i + 1] = lcm(arr[i], arr[i + 1]);
-        }
-        return arr[arr.length - 1];
-    }
+
 }
