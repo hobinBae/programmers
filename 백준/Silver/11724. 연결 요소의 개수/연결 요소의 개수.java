@@ -17,11 +17,11 @@ public class Main {
 
         for(int i = 1; i <= E; i++){
             st = new StringTokenizer(br.readLine());
+            int u = Integer.parseInt(st.nextToken());
             int v = Integer.parseInt(st.nextToken());
-            int e = Integer.parseInt(st.nextToken());
 
-            graph[v].add(e);
-            graph[e].add(v);
+            graph[u].add(v);
+            graph[v].add(u);
         }
 
         for(int i = 1; i <= V; i++){
