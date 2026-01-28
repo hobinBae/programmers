@@ -19,9 +19,11 @@ public class Main {
 
         int N = Integer.parseInt(br.readLine());
 
-        PriorityQueue<Node> rowPq = new PriorityQueue<>((o1, o2) -> Integer.compare(o2.count, o1.count));
+//        PriorityQueue<Node> rowPq = new PriorityQueue<>((o1, o2) -> Integer.compare(o2.count, o1.count));
+        int[] row = new int[N];
+        Integer[] order = new Integer[N];
         PriorityQueue<Node> culPq = new PriorityQueue<>((o1, o2) -> Integer.compare(o2.count, o1.count));
-        
+
         int rowSum = 0;
         int culSum = 0;
 
@@ -29,16 +31,20 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         for (int i = 0; i < N; i++) {
-            int row = Integer.parseInt(st.nextToken());
-            rowPq.add(new Node(i, row));
-            rowSum += row;
+            int rowValue = Integer.parseInt(st.nextToken());
+//            rowPq.add(new Node(i, row));
+            row[i] = rowValue;
+            rowSum += rowValue;
+            order[i] = i;
         }
+
+        Arrays.sort(order, (o1, o2) -> Integer.compare(row[o2], row[o1]));
 
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            int cul = Integer.parseInt(st.nextToken());
-            culPq.add(new Node(i, cul));
-            culSum += cul;
+            int culValue = Integer.parseInt(st.nextToken());
+            culPq.add(new Node(i, culValue));
+            culSum += culValue;
         }
 
         if (rowSum != culSum) {
@@ -48,11 +54,11 @@ public class Main {
 
         //행의 필요한 1만큼 우선순위 큐를 돌면서 1을 뺴준다.
 
-        while (!rowPq.isEmpty()) {
-            Node currRow = rowPq.poll();
+        for(int i = 0; i < N; i++){
+            int currRow = row[order[i]];
             ArrayList<Node> list = new ArrayList<>();
 
-            for (int j = 0; j < currRow.count; j++) {
+            for (int j = 0; j < currRow; j++) {
                 if (culPq.isEmpty()) {
                     System.out.println(-1);
                     return;
@@ -66,7 +72,7 @@ public class Main {
                 }
 
                 cul.count--;
-                matrix[currRow.index][cul.index]++;
+                matrix[order[i]][cul.index]++;
                 list.add(cul);
             }
 
