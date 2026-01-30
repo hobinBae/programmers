@@ -165,7 +165,6 @@ public class Main {
 
     static void watchType5(int y, int x, int index){
         //얘는 그냥 4방향 다 가면 됨
-        for(int i = 0; i < 4; i++){
             List<int[]> list = new ArrayList<>();
             for(int j = 0; j < 4; j++){
                 watch(y, x, j, list);
@@ -173,7 +172,6 @@ public class Main {
             backtrack(index + 1);
             recovery(list);
 
-        }
 
     }
 
