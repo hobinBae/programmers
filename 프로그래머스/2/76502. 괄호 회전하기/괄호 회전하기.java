@@ -1,35 +1,58 @@
 import java.util.*;
 class Solution {
     public int solution(String s) {
-        Map<Character, Character> map = new HashMap<>();
-        map.put('[', ']');
-        map.put('{', '}');
-        map.put('(', ')');
+        // 길이를 2배로 늘리고 한칸씩 옆으로 가면 될 듯 
+        
+        int sLength = s.length();
+        String rotateS = s + s;
         int answer = 0;
-        char[] ch = s.toCharArray();
-        for(int i = 0; i < ch.length; i++){
-            Stack<Character> stack = new Stack<>();
-            int pop = 0;
-            for (int j = i; j < i + ch.length; j++) {
+        System.out.println(rotateS);
+        for(int i = 0; i < rotateS.length() - sLength; i++){
+            // System.out.println(i);
+            ArrayDeque<Character> dq = new ArrayDeque<>();
+            for(int j = i; j < i + sLength; j++){
+                char c = rotateS.charAt(j);
 
-                if(stack.isEmpty() && map.containsKey(ch[j % ch.length])){
-                    stack.push(ch[j % ch.length]);
-                }else{
-                    if(!stack.isEmpty() && map.get(stack.peek()) == ch[j % ch.length]){
-                        stack.pop();
-                        pop++;
-                    }
-                    else if(map.containsKey(ch[j % ch.length])){
-                        stack.push(ch[j % ch.length]);
-                    }
-
+                
+                if(dq.isEmpty()){
+                    dq.addLast(c);
+                    continue;
                 }
+                
+                if(c == ')'){
+                    if(dq.peekLast() == '('){
+                        dq.pollLast();
+                    }else{
+                        dq.addLast(c);
+                    }
+                }
+                
+               else if(c == '}'){
+                    if(dq.peekLast() == '{'){
+                        dq.pollLast();
+                    }else{
+                        dq.addLast(c);
+                    }
+                }
+                
+               else if(c == ']'){
+                     if(dq.peekLast() == '['){
+                        dq.pollLast();
+                    }else{
+                        dq.addLast(c);
+                    }
+                }
+              else{
+                  dq.addLast(c);
+              }
             }
-            if(pop == 0)
-                continue;
-            if(stack.isEmpty())
+            
+            if(dq.isEmpty()){
                 answer++;
+            }
+
         }
+        
         return answer;
     }
 }
