@@ -1,18 +1,19 @@
 import java.util.*;
 class Solution {
     public int solution(int[] citations) {
-        int[] arr = new int[citations.length];
-        for(int i = 0; i < citations.length; i++){
-            int max = 0;
-            for(int j = 0; j < citations.length; j++){
-                if(citations[i] <= citations[j]){
-                    max++;
-                }
+        int answer = 0;
+        
+        Arrays.sort(citations);
+    
+        int index = 1;
+        for(int i = citations.length - 1; i >= 0; i--){
+            if(index <= citations[i]){
+                answer = index++;
+            }else{
+                break;
             }
-            arr[i] = Math.min(citations[i], max);
-
+          
         }
-        Arrays.sort(arr);
-        return arr[arr.length - 1];
+        return answer;
     }
 }
