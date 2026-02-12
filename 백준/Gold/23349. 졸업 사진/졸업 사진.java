@@ -13,17 +13,13 @@ public class Main {
         }
     }
 
-    static int maxStart = 0;
-    static int maxEnd = 0;
-
-    static int maxCount = Integer.MIN_VALUE;
-
-    static String maxPlace = "";
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-
+        int maxStart = 0;
+        int maxEnd = 0;
+        int maxCount = Integer.MIN_VALUE;
+        String maxPlace = "";
         HashMap<String, List<Time>>map = new HashMap<>();
 
         Set<String> set = new HashSet<>();
